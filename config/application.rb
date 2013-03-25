@@ -58,5 +58,9 @@ module MobileNav
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.assets.precompile += [*1..9].collect { |i| "experiment-0#{i}.css" }
+    config.assets.precompile += [*1..9].collect { |i| "experiment-0#{i}.js" }
+
   end
 end

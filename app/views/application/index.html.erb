@@ -1,1 +1,16 @@
-home
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mobile Nav Experiments</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <ul>
+      <% [*1..9].each do |i| %>
+        <li><%= link_to "Experiment 0#{i}", send("experiment_0#{i}_path") %></li>
+      <% end %>
+    </ul>
+  </body>
+</html>

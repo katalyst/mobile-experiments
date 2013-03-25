@@ -1,4 +1,9 @@
 MobileNav::Application.routes.draw do
+
+  [*1..9].each do |i|
+    match "/experiment-0#{i}" => "application#experiment_0#{i}", as: "experiment_0#{i}"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
