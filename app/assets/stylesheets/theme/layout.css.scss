@@ -2,7 +2,9 @@
 @import "compass/css3/transform";
 @import "compass/css3/transition";
 
-$layout-debug: true !default;
+$layout-debug:            true  !default;
+$layout-footer-height:    100px !default;
+$layout-container-width:  800px !default;
 
 //
 // To use layout the HTML & BODY elements must have height & width of 100%:
@@ -14,139 +16,141 @@ $layout-debug: true !default;
 // }
 //
 
-.layout {
-  height: 100%;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-}
+// LAYOUT (MOBILE)
 
-.layout--content {
-  height: 100%;
-  min-height: 100%;
-  position: relative;
-  width: 100%;
-}
+@media (max-width: 1024px) {
 
-.layout--nav-mobile {
-  left: 0;
-  min-height: 100%;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
+  .layout {
+    position: relative;
+    min-height: 100%;
+//    height: 100%;
+    overflow-x: hidden;
+    width: 100%;
+  }
 
-.layout--wrapper {
-  @include transition-duration(0.2s);
-  @include transition-property(transform);
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
-.layout--main {
-  @include transition-duration(0.2s);
-  @include transition-property(transform);
-  min-height: 100%;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-}
-
-.layout--main-content {
-  //
-}
-
-.layout--header {
-  //
-}
-
-.layout--header-content {
-  //
-}
-
-.layout--nav-primary {
-  display: none;
-}
-
-.layout--switch {
-  //
-}
-
-.layout--footer {
-  bottom: 0;
-  display: none;
-  height: 200px;
-  left: 0;
-  position: absolute;
-  width: 100%;
-}
-
-.layout--footer-content {
-  height: 100%;
-  overflow: hidden;
-}
-
-/**
- * LAYOUT-OPEN
- */
-
-.layout-open {
+  .layout--content {
+    height: 100%;
+//    position: relative;
+//    width: 100%;
+  }
 
   .layout--nav-mobile {
-    position: absolute;
+    left: 0;
+//    min-height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
 
   .layout--wrapper {
-    @include transform(translate(100%, 0));
-    // position: fixed; // This breaks Android, but works well on iOS.
+    @include transition-duration(0.2s);
+    @include transition-property(transform);
+//    height: 100%;
+    position: absolute;
+//    width: 100%;
   }
 
   .layout--main {
+    @include transition-duration(0.2s);
+    @include transition-property(transform);
+    height: 100%;
+//    min-height: 100%;
+//    position: relative;
+//    width: 100%;
+  }
+
+  .layout--main-content {
+    //
+  }
+
+  .layout--nav-primary, // DEPRECATED
+  .layout--nav-desktop {
+    display: none;
+  }
+
+  .layout--switch {
+    //
+  }
+
+  .layout--footer {
+    display: none;
+  }
+
+  .layout--footer-content {
+    //
+  }
+
+}
+
+// LAYOUT-OPEN (MOBILE)
+
+@media (max-width: 1024px) {
+
+  .layout-open {
+//    overflow-x: hidden;
+  }
+
+  .layout-open .layout--nav-mobile {
+    position: absolute;
+//    min-height: 100%;
+  }
+
+  .layout-open .layout--wrapper {
+    @include transform(translate(100%, 0));
+//    position: fixed; // This breaks Android, but works well on iOS.
+  }
+
+  .layout-open .layout--main {
     @include transform(translate(-50px, 0));
   }
 
 }
 
+// LAYOUT (DESKTOP)
+
 @media (min-width: 1024px) {
+
   .layout {
-    overflow: auto;
+    position: relative;
+    min-height: 100%;
   }
-  .layout--container {
-    margin: 0 auto;
-    width: 800px;
+
+  .layout--content {
+    height: 100%;
   }
+
   .layout--nav-mobile {
     display: none;
   }
+
   .layout--wrapper {
-    @include transition-duration(0);
-    height: auto;
-    margin-bottom: 200px;
-    position: static;
+    margin-bottom: $layout-footer-height;
   }
+
   .layout--main {
-    @include transition-duration(0);
   }
+
   .layout--switch {
     display: none;
   }
-  .layout--nav-primary {
-    display: block;
-  }
+
   .layout--footer {
-    display: block;
+    bottom: 0;
+    height: $layout-footer-height;
+    left: 0;
+    position: absolute;
+    width: 100%;
   }
-  .layout-open {
-    .layout--wrapper {
-      @include transform(translate(0, 0));
-      position: static;
-    }
-    .layout--main {
-      @include transform(translate(0, 0));
-    }
+
+  .layout--footer-content {
+    height: 100%;
   }
+
+  .layout--container {
+    margin: 0 auto;
+    width: $layout-container-width;
+  }
+
 }
 
 @if $layout-debug {
@@ -160,7 +164,7 @@ $layout-debug: true !default;
   }
 
   .layout--nav-mobile {
-    background: red;
+    background: orange;
   }
 
   .layout--main {
@@ -171,11 +175,8 @@ $layout-debug: true !default;
     background: green;
   }
 
-  .layout--header {
-    background: lighten(orange, 20%);
-  }
-
-  .layout--header-content {
+  .layout--nav-primary, // DEPRECATED
+  .layout--nav-desktop {
     background: orange;
   }
 
