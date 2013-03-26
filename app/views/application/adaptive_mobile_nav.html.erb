@@ -11,52 +11,19 @@
     <div class="layout layout--container">
       <div class="layout--content">
         <nav class="layout--nav-mobile" role="navigation">
-          <ul class="rhythm">
-            <li>wqe av</li>
-            <li>sda nav</li>
-            <li>ghg</li>
-            <li>navasdf asd</li>
-            <li>asq nav</li>
-            <li>da nav adfas</li>
-            <li>nav</li>
-            <li>navasdf asd</li>
-            <li>sdfgsav</li>
-            <li>nsdfaav adfas</li>
-            <li>asd nav</li>
-            <li>nav</li>
-            <li>navasdf asd</li>
-            <li>asdf nav</li>
-            <li>rsh4 adfas</li>
-            <li>wqe av</li>
-            <li>sda nav</li>
-            <li>ghg</li>
-            <li>navasdf asd</li>
-            <li>asq nav</li>
-            <li>da nav adfas</li>
-            <li>nav</li>
-            <li>navasdf asd</li>
-            <li>sdfgsav</li>
-            <li>nsdfaav adfas</li>
-            <li>asd nav</li>
-            <li>nav</li>
-            <li>navasdf asd</li>
-            <li>asdf nav</li>
-            <li>rsh4 adfas</li>
-            <li>wqe av</li>
-            <li>sda nav</li>
-            <li>ghg</li>
-            <li>navasdf asd</li>
-            <li>asq nav</li>
-            <li>da nav adfas</li>
-            <li>nav</li>
-            <li>navasdf asd</li>
-            <li>sdfgsav</li>
-            <li>nsdfaav adfas</li>
-            <li>asd nav</li>
-            <li>nav</li>
-            <li>navasdf asd</li>
-            <li>asdf nav</li>
-            <li>rsh4 adfas</li>
+          <ul class="nav-mobile">
+            <% { "A" => [], "B" => [ "A", "B", "C", "D", "E" ], "C" => [ "A", "B" ] }.each do |k,v| %>
+              <li>
+                <%= link_to k, "#" %>
+                <% if v.present? %>
+                  <ul>
+                    <% v.each do |c| %>
+                      <li><%= link_to k+c, "#" %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </li>
+            <% end %>
           </ul>
         </nav>
         <div class="layout--wrapper">
