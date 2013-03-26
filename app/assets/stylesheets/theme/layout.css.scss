@@ -1,0 +1,190 @@
+@import "compass/css3/box-sizing";
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+
+$layout-debug: true !default;
+
+//
+// To use layout the HTML & BODY elements must have height & width of 100%:
+//
+// html,
+// body {
+//   height: 100%;
+//   width: 100%;
+// }
+//
+
+.layout {
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.layout--content {
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.layout--nav-mobile {
+  left: 0;
+  min-height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.layout--wrapper {
+  @include transition-duration(0.2s);
+  @include transition-property(transform);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.layout--main {
+  @include transition-duration(0.2s);
+  @include transition-property(transform);
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.layout--main-content {
+  //
+}
+
+.layout--header {
+  //
+}
+
+.layout--header-content {
+  //
+}
+
+.layout--nav-primary {
+  display: none;
+}
+
+.layout--switch {
+  //
+}
+
+.layout--footer {
+  bottom: 0;
+  display: none;
+  height: 200px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.layout--footer-content {
+  height: 100%;
+  overflow: hidden;
+}
+
+/**
+ * LAYOUT-OPEN
+ */
+
+.layout-open {
+
+  .layout--nav-mobile {
+    position: absolute;
+  }
+
+  .layout--wrapper {
+    @include transform(translate(100%, 0));
+    // position: fixed; // This breaks Android, but works well on iOS.
+  }
+
+  .layout--main {
+    @include transform(translate(-50px, 0));
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    overflow: auto;
+  }
+  .layout--container {
+    margin: 0 auto;
+    width: 800px;
+  }
+  .layout--nav-mobile {
+    display: none;
+  }
+  .layout--wrapper {
+    @include transition-duration(0);
+    height: auto;
+    margin-bottom: 200px;
+    position: static;
+  }
+  .layout--main {
+    @include transition-duration(0);
+  }
+  .layout--switch {
+    display: none;
+  }
+  .layout--nav-primary {
+    display: block;
+  }
+  .layout--footer {
+    display: block;
+  }
+  .layout-open {
+    .layout--wrapper {
+      @include transform(translate(0, 0));
+      position: static;
+    }
+    .layout--main {
+      @include transform(translate(0, 0));
+    }
+  }
+}
+
+@if $layout-debug {
+
+  .layout {
+    background: lighten(black, 20%);
+  }
+
+  .layout--content {
+    background: black;
+  }
+
+  .layout--nav-mobile {
+    background: red;
+  }
+
+  .layout--main {
+    background: lighten(green, 20%);
+  }
+
+  .layout--main-content {
+    background: green;
+  }
+
+  .layout--header {
+    background: lighten(orange, 20%);
+  }
+
+  .layout--header-content {
+    background: orange;
+  }
+
+  .layout--footer {
+    background: lighten(blue, 20%);
+  }
+
+  .layout--footer-content {
+    background: blue;
+  }
+
+}

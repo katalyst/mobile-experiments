@@ -12,3 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+$(function() {
+  $(".layout--switch").on("click", function() {
+   $(this).closest(".layout").toggleClass("layout-open");
+   return false;
+  });
+});
