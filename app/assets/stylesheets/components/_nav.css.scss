@@ -1,3 +1,7 @@
+@import "compass/css3/inline-block";
+
+$nav-debug: true !default;
+
 .nav-mobile {
   > li {
     background: #eee;
@@ -5,4 +9,56 @@
       background: #999;
     }
   }
+}
+
+.nav-horizontal {
+
+  position: relative;
+
+  > ul {
+    text-align: right;
+  }
+
+  > ul > li {
+    @include inline-block;
+    vertical-align: top;
+  }
+
+  > ul > li > ul {
+    display: none;
+  }
+
+  > ul > li > ul > li {
+    @include inline-block;
+    vertical-align: top;
+  }
+
+  > ul > li.nav-horizontal--selected-item > ul {
+    display: block;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 100%;
+    width: 100%;
+  }
+
+}
+
+@if $nav-debug {
+
+  .nav-horizontal {
+    > ul {
+      background: lighten(red, 20%);
+    }
+    > ul > li {
+      background: red;
+    }
+    > ul > li > ul {
+      background: lighten(orange, 20%);
+    }
+    > ul > li > ul > li {
+      background: orange;
+    }
+  }
+
 }

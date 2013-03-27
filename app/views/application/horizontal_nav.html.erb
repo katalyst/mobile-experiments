@@ -7,5 +7,32 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <div style="width:960px;margin:0 auto;">
+      <nav class="nav-horizontal">
+        <ul>
+          <% { "home<br/>page".html_safe => [ "A", "B", "C" ], "B".html_safe => [ "A<br/>A".html_safe, "B", "C", "D", "E" ], "C" => [ "A", "B" ] }.each do |k,v| %>
+            <li>
+              <%= link_to k, "#" %>
+              <% if v.present? %>
+                <ul>
+                  <% v.each do |c| %>
+                    <li><%= link_to k+c, "#" %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum.
+      </p>
+    </div>
   </body>
 </html>
