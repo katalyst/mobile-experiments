@@ -10,6 +10,8 @@ $(function() {
   });
 });
 
+var navHorizontalClick = (navHorizontalClick == undefined) ? true : navHorizontalClick;
+var navHorizontalDelay = (navHorizontalDelay == undefined) ? 250 : navHorizontalDelay;
 
 $(function() {
   $(".nav-horizontal").each(function() {
@@ -42,7 +44,7 @@ $(function() {
 
       timeout = setTimeout(function() {
         $item.trigger("intentionalmouseenter");
-      }, 500);
+      }, navHorizontalDelay);
 
       $item.on("mouseleave", function() {
         clearTimeout(timeout);
@@ -55,7 +57,7 @@ $(function() {
 
       timeout = setTimeout(function() {
         $item.trigger("intentionalmouseleave");
-      }, 500);
+      }, navHorizontalDelay);
 
       $item.on("mouseenter", function() {
         clearTimeout(timeout);
@@ -93,24 +95,31 @@ $(function() {
 
     reset = function() {
       $items.off("intentionalmouseenter intentionalmouseleave show mouseenter mouseleave")
+      $links.off("click");
+
+      $items.removeClass("nav-horizontal--selected-item");
+
       $items.on("intentionalmouseenter", itemIntentionalMouseEnter);
       $items.on("show", itemShow);
       $items.on("mouseenter", itemMouseEnter);
       $items.on("mouseleave", itemMouseLeave);
-      $items.removeClass("nav-horizontal--selected-item");
-      $links.off("click").on("click", linkClickShow);
+      if (navHorizontalClick) {
+        $links.on("click", linkClickShow);
+      }
     };
 
-    // Prevent clicks on the second level a navigation from propagating up to
-    // the HTML element.
-    $nav.on("click", "> ul > li > ul", function(event) {
-      event.stopPropagation();
-    });
+    if (navHorizontalClick) {
+      // Prevent clicks on the second level a navigation from propagating up to
+      // the HTML element.
+      $nav.on("click", "> ul > li > ul", function(event) {
+        event.stopPropagation();
+      });
 
-    // Any clicks outside the nav should close the second level.
-    $("html").on("click", function() {
-      reset();
-    });
+      // Any clicks outside the nav should close the second level.
+      $("html").on("click", function() {
+        reset();
+      });
+    }
 
     // Setup event listeners.
     reset();
