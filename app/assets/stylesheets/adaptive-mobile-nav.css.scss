@@ -1,6 +1,6 @@
 @import "compass/reset";
-@import "theme/layout";
-@import "theme/nav";
+@import "components/layout";
+@import "components/nav";
 
 * {
   @include box-sizing(border-box);
