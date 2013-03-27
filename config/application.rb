@@ -60,6 +60,7 @@ module MobileNav
     config.assets.version = '1.0'
 
     config.assets.precompile += %W(adaptive-mobile-nav.css adaptive-mobile-nav.js)
+    config.assets.precompile += %W(horizontal-nav.css horizontal-nav.js)
 
   end
 end
