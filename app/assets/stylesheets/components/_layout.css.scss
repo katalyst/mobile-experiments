@@ -5,6 +5,7 @@
 $layout-debug:            true  !default;
 $layout-footer-height:    100px !default;
 $layout-container-width:  800px !default;
+$layout-breakpoint:       960px !default;
 
 //
 // To use layout the HTML & BODY elements must have height & width of 100%:
@@ -18,7 +19,7 @@ $layout-container-width:  800px !default;
 
 // LAYOUT (MOBILE)
 
-@media (max-width: 1024px) {
+@media (max-width: $layout-breakpoint) {
 
   .layout {
     position: relative;
@@ -84,7 +85,7 @@ $layout-container-width:  800px !default;
 
 // LAYOUT-OPEN (MOBILE)
 
-@media (max-width: 1024px) {
+@media (max-width: $layout-breakpoint) {
 
   .layout-open {
 //    overflow-x: hidden;
@@ -108,7 +109,7 @@ $layout-container-width:  800px !default;
 
 // LAYOUT (DESKTOP)
 
-@media (min-width: 1024px) {
+@media (min-width: $layout-breakpoint) {
 
   .layout {
     position: relative;
