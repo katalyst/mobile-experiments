@@ -1,0 +1,20 @@
+$header-debug: true !default;
+
+.header-sticky {
+}
+
+.header-sticky-stuck {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+@if ($header-debug) {
+  .header-sticky {
+    background: red;
+  }
+
+  .header-sticky-stuck {
+    background: green;
+  }
+}

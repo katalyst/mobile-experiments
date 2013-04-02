@@ -61,6 +61,7 @@ module MobileNav
 
     config.assets.precompile += %W(adaptive-mobile-nav.css adaptive-mobile-nav.js)
     config.assets.precompile += %W(horizontal-nav.css horizontal-nav.js)
+    config.assets.precompile += %W(sticky-header.css sticky-header.js)
 
   end
 end
