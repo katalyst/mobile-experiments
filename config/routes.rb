@@ -3,6 +3,7 @@ MobileNav::Application.routes.draw do
   match "/adaptive-mobile-nav" => "application#adaptive_mobile_nav", as: "adaptive_mobile_nav"
   match "/horizontal-nav" => "application#horizontal_nav", as: "horizontal_nav"
   match "/sticky-header" => "application#sticky_header", as: "sticky_header"
+  match "/accessibility" => "application#accessibility", as: "accessibility"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

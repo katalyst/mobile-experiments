@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+      The document title is important when navigating between windows & tabs.
+
+      It should contain the name of the page, a seperator and the name of the
+      site. Think of it as a summary of the two H1's on the page (see below).
+    -->
+    <title>Accessibility - Experiments</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <%= stylesheet_link_tag    "accessibility", :media => "all" %>
+    <%= javascript_include_tag "accessibility" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <!--
+      Don't use SECTION or ARTICLE elements to wrap the main content or the
+      main HEADER & FOOTER elements, use DIVs.
+    -->
+    <div class="wrapper">
+      <!--
+        Somewhere near the top, a skip to content link is good. If you need to
+        hide it, don't use `display:none` or `visibility:hidden` as the will
+        also hide it from screen readers.
+
+        This is mainly for browsers and screen readers that don't yet support
+        ARIA roles / HTML section elements and have no way of identifying the
+        documents's main content.
+
+        Note: This needs to link to an A element & there's JavaScript required
+        to get it working correctly in WebKit & Firefox.
+      -->
+      <a href="#main">skip to content</a>
+      <!--
+        Don't use A elements for things that are actions, use BUTTON elements.
+        If a link's "href" attribute is "#", then is should almost definitely
+        be a button.
+      -->
+      <button>Increase Text Size</button>
+      <!--
+        Have only 1 HEADER outside of a SECTION or ARTICLE element. This will
+        be recognised as the main header. Include an ARIA role of "banner" to
+        help screen readers that support ARIA roles, but don't understand
+        HEADER elements.
+      -->
+      <header role="banner">
+        <!--
+          The site title should be the first H1 on the page (and ideally
+          instide the main HEADER).
+
+          If you're using an image make sure it's alt text has the site title.
+        -->
+        <h1>
+          <a href="/">
+            <img src="http://placehold.it/200x100&text=EXPERIMENTS" alt="Experiments" />
+          </a>
+        </h1>
+        <!--
+          Always markup navigation with a NAV element with a "navigation" ARIA role.
+        -->
+        <nav class="nav-primary" role="navigation">
+          <!--
+            Nested lists are good screen readers will explain the level of each
+            list based on the nesting, but be careful with drop-downs or hidden
+            content.
+          -->
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <span>About</span>
+              <ul>
+                <li>
+                  <a href="/history">History</a>
+                </li>
+                <li>
+                  <a href="/board-members">Board Members</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span>Projects</span>
+              <ul>
+                <li>
+                  <a href="/projects/1">Project ABC</a>
+                </li>
+                <li>
+                  <a href="/projects/2">Project XYZ</a>
+                </li>
+                <li>
+                  <a href="/projects/3">Project 123</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!--
+        Elements used for layout purposes (wrapping columns, aligning content
+        etc) should be DIVs. DIV's aren't special and won't be highlighted to
+        the user. Use SECTION elements when there's actual content to go in it.
+
+        A rought rule-of-thumb: If a DIV has an H1, H2, H3, H4, H5, H6, HGROUP,
+        HEADER or FOOTER as a direct child (not a descendant), it should
+        probably be a SECTION or ARTICLE with an ARIA role.
+      -->
+      <div class="container">
+        <!--
+          Use a SECTION element for the main content with an ARIA role of "main".
+          In the future this will likely be replaced with a MAIN element.
+        -->
+        <section role="main">
+          <!--
+            A second H1 is used for the page title (with the exception of a
+            home page, where there might be only a single H1).
+
+            Someone using a screen reader might jump straight to this heading,
+            it should be the start of the main content.
+          -->
+          <h1>
+            <!--
+              This is an anchor for the "skip to content" link. Ideally it
+              should be just before the document heading.
+            -->
+            <a id="main" name="main" tabindex="-1"></a>
+            Accessibility
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <!--
+            Always put "scope" attibutes on TH elements. This allows a cell to
+            be read as soemthing useful like: "Points, Jane, 25."
+          -->
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Player</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Jane</th>
+                <td>25</td>
+              </tr>
+              <tr>
+                <th scope="row">Paul</th>
+                <td>13</td>
+              </tr>
+            </tbody>
+          </table>
+          <!--
+            Give SECTION elements an ARIA role of "region".
+          -->
+          <section role="region">
+            <!--
+              Don't reset heading level's HTML5-style. Screen reader's don't
+              use the new outline algorithm to work out heading levels, they
+              just look at the element.
+            -->
+            <h2>Something Interesting</h2>
+            <!--
+              Use ARTICLE elements with an ARIA "artcile" roles if possible, but they're
+              not as important or useful and many other parts.
+            -->
+            <article role="article">
+              <h3>
+                <!--
+                  Avoid repeating links. If there's two elements near each other
+                  that both link to the same place, try to group them.
+                -->
+                <a href="/my-article">
+                  Jupiter
+                  <!--
+                    Make sure IMG elements have an "alt" attribute. If an image
+                    shoudl be ignored by screen readers, give it an empty "alt"
+                    attribute. In this example the image is the same as the
+                    title proceeding it, so there's no point mentioning it as
+                    it won't give the user anymore information.
+                  -->
+                  <img src="http://placehold.it/500x200&text=JUPITER" alt="" />
+                </a>
+              </h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </article>
+          </section>
+          <!--
+            If a form has content outside of the FORM element that is
+            relevant to the form warp the whole thing in a DIV with the
+            "form" ARIA role, otherwise, put the ARIA role on the FORM
+            element.
+          -->
+          <div role="form">
+            <form action="/login">
+              <!--
+                Always include the "for" attribute on label elements.
+              -->
+              <label for="name">
+                Name:
+                <input type="text" name="name"/>
+              </label>
+              <label for="password">
+                Password:
+                <input type="password" name="password"/>
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+            <p>
+              <a href="/forgot-password">Reset Password</a>
+            </a>
+          </div>
+        </section>
+        <!--
+          ASIDE's should have an ARIA role of "complementary", although the
+          technical definition of an ASIDE element and the ARIA role of
+          "complementary" don't really match.
+
+          Don't get hung on this. If it's easier to put this "complementary"
+          content as "region" in of the "main" content, then do that.
+        -->
+        <aside role="complementary">
+          <!--
+            Note: This heading will be a level below the "Accessibility" H1,
+            next to the "Something Interesting" heading.
+          -->
+          <h2>Did you know?</h2>
+          <!--
+            Use lists whenever in makes sense to. List can be summarized: "list
+            of 4 items" and easily skipped. Pretty much the same idea as when a
+            sighted person is reading a document; someone can quickly identify
+            lists to find what they're after.
+          -->
+          <ul>
+            <li>A mole can dig a tunnel 300 feet long in just one night.</li>
+            <li>A crocodile always grows new teeth to replace the old teeth.</li>
+            <li>A group of geese flying (typically in a v-shape) is called a skein.</li>
+            <li>A hedgehog&rsquo;s heart beats 300 times a minute on average.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+    <!--
+      Have only 1 FOOTER outside of a SECTION or ARTICLE element. This will be
+      recognised as the main footer. Include an ARIA role of "contentinfo" for
+      screen readers that support ARIA roles, but not HTML section elements.
+    -->
+    <footer role="contentinfo">
+      <!--
+        asd
+      -->
+      <nav role="navigation">
+        <ul>
+          <li>Legal</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+      <p>
+        &copy; Copyright 2012 Example Company
+      </p>
+    </footer>
+  </body>
+</html>
